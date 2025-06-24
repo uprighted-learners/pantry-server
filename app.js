@@ -9,9 +9,11 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
+app.use("./middleware/authMdw", { authenticate, isAuthorized, isAdmin });
+
 
 
 app.listen(PORT, () => {
 	dbConnect();
 	console.log(`[server] listening on ${PORT}`)
-})
+});
