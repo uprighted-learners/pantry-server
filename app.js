@@ -9,7 +9,7 @@ const PORT = process.env.PORT;
 app.use(cors());
 app.use(express.json());
 
-app.use("./middleware/authMdw", { authenticate, isAuthorized, isAdmin });
+// import routes here
 
 
 

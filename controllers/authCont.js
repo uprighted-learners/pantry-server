@@ -1,16 +1,13 @@
-// Should include isAdmin, authorization, and authentication
-// ? SALT, jwt, JWT_KEY in here or in utils and then imported
+// ? some sort of express code
+// bcrypt
 
-// * write middleware and token first
+// mongoose
+// SALT
+// generateToken
 
+// const User = require("../models/User");
+// middleware - isAdmin, authorization, and authentication
 
-
-/* imports - Move to top
-
-const User = require("../models/User");
-*key salt etc goes here
-
-*/
 
 
 

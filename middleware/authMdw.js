@@ -8,8 +8,8 @@ const authenticate = async (req, res, next) => {
 
         if (!token) throw new Error("Token not provided or invalid");
 
-        const decoded = jwt.verify(token, generateToken);
-        const user = await UserActivation.findbyId(decoded._id);
+        const decoded = jwt.verify(token, process.env.JWT_KEY);
+        const user = await User.findById(decoded.userId);
 
         if (!user) throw new Error("User not found");
 
@@ -24,7 +24,11 @@ const authenticate = async (req, res, next) => {
 };
 
 const isAuthorized = (req, res, next) => {
-    if (!req.user) throw new Error("Unauthorized");
+    if (!req.user) {
+        return res.status(401).json({
+            message: "Unauthorized"
+        });
+    }
     next();
 };
 
