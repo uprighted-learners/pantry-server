@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const pantrySchema = new mongoose.Schema({
         pantryName: { type: String, required: true },
-    address: String,
+     address: String,
      city: String,
      state: String,
         zipCode: { type: String, required: true },
@@ -13,3 +13,5 @@ const pantrySchema = new mongoose.Schema({
 
 const Pantry = mongoose.model('Pantry', pantrySchema)
 module.exports = Pantry;
+
+// can you rename needs to requirements ?
