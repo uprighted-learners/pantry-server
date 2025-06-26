@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('./models/User');  
 const app = express();
 
-app.post('./register', async(req, res)=>{
+app.post('', async(req, res)=>{
     const{fullName, zipCode, email, password, isAdmin} = req.body;
 
     try{ 
