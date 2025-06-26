@@ -2,6 +2,7 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 function generateToken(user) {
+    console.log("JWT Secret:", process.env.JWT_KEY);
     const payload = { userId: user._id };// changed the User to user, as User was referencing the model and we only needed to use the instance of the user object
     const token = jwt.sign(payload, process.env.JWT_KEY, { expiresIn: "24h" });
     console.log("Generated Token:", token);
@@ -10,7 +11,19 @@ function generateToken(user) {
 
 module.exports = { generateToken };
 
-/* 
+
+
+
+
+
+
+
+
+
+
+
+
+/* General Commentary:
 
 I realized why Nick said there was so much going on inside my generateToken.js based on the example from gitHub (below)... because there is! I moved the jwt var outside the function to the top of the file, and the secret var is not needed since you can pass process.env directly in jwt.sign() just as easily. You also don't technically need to save the jwt.sign() to the token var, and can just return that, but I chose to keep it assigned to the token var to keep it pretty and to make the console log easier to write/read, then returned token. I wanted to explain it since I sent the other code to you. This way y'all can see the difference, and reference it for yourselves when you need to in the future. 
 

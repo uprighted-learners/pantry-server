@@ -6,6 +6,7 @@ const { generateToken } = require("../utils/generateToken");
 
 
 const registerUser = async (req, res) => {
+    console.log("Let's get you registered");
     try {
         const { fullName, zipCode, email, password, isAdmin } = req.body;
         console.log(fullName, zipCode, email, password, isAdmin);
@@ -30,6 +31,7 @@ const registerUser = async (req, res) => {
         await newUser.save();
 
         const token = generateToken(newUser);
+        console.log("New user generated token:", token);
 
         res.status(201).json({
             message: "User created",
@@ -45,7 +47,7 @@ const registerUser = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.status(500).json({
-            error: `${err}` // what exact message does this send and do I need to write one out?
+            message: "Something went wrong on our end. Please try again later."
         });
     }
 };
@@ -65,6 +67,7 @@ const loginUser = async (req, res) => {
         });
 
         const token = generateToken(user);
+        console.log(token);
 
         res.status(200).json({
             message: "Login Successful",
