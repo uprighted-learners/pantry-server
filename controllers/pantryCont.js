@@ -22,7 +22,7 @@ exports.CreatePantry = async (req, res) => {
             return res.status(409).json({ message: "Pantry already exists"});
         }
 
-        const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, needs, contact });
+        const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, requirements, contact });
         await newPantry.save();
 
         res.status(201).json({

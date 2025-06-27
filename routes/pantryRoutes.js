@@ -11,8 +11,8 @@ router.get("/", async (req, res) => {
 }})
 
 router.post("/getinvolved", async (req, res) => {
-    const  { pantryName, address, city, state, zipCode, hours, needs, contact } = req.body;
-            console.log(pantryName, address, city, state, zipCode, hours, needs, contact);
+    const  { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
+            console.log(pantryName, address, city, state, zipCode, hours, requirements, contact);
 
             try {
             const foundPantry = await Pantry.findOne({ pantryName });
@@ -23,7 +23,7 @@ router.post("/getinvolved", async (req, res) => {
                 });
             } 
 
-                const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, needs, contact });
+                const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, requirements, contact });
                 await newPantry.save();
 
                 res.status(201).json({ message: "Pantry added successfully", pantry: newPantry });

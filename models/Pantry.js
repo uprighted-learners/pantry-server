@@ -7,11 +7,9 @@ const pantrySchema = new mongoose.Schema({
      state: String,
         zipCode: { type: String, required: true },
      hours: String,
-     needs: [String],
+     requirements: [String],
      contact: String
 });
 
 const Pantry = mongoose.model('Pantry', pantrySchema)
 module.exports = Pantry;
-
-// can you rename needs to requirements ?
