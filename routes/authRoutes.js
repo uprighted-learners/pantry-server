@@ -24,4 +24,10 @@ router.post("/login", loginUser);
 
 console.log(registerUser)
 
+<<<<<<< HEAD
 module.exports = router;
+=======
+module.exports = router;
+
+
+>>>>>>> develop
