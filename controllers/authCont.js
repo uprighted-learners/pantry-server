@@ -90,8 +90,4 @@ const loginUser = async (req, res) => {
 
 
 
-<<<<<<< HEAD
 module.exports = { registerUser, loginUser };// Should include isAdmin, authorization, and authentication
-=======
-module.exports = { registerUser, loginUser };
->>>>>>> develop

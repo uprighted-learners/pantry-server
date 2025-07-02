@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-
-=======
->>>>>>> develop
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
@@ -53,8 +49,4 @@ console.log("Generated Token:", token);
                                         *<-- added a return here 
 }
 
-<<<<<<< HEAD
 */
-=======
-*/
->>>>>>> develop
