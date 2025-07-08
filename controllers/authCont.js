@@ -1,4 +1,4 @@
-const bcryptjs = require("bcryptjs");
+const bcrypt = require("bcrypt");
 const User = require("../models/User");
 const SALT = Number(process.env.SALT);
 const { generateToken } = require("../utils/generateToken");
@@ -18,7 +18,7 @@ const registerUser = async (req, res) => {
             });
         }
 
-        const hashedPassword = bcryptjs.hashSync(password, SALT);
+        const hashedPassword = bcrypt.hashSync(password, SALT);
 
         const newUser = new User({
             fullName,
@@ -61,7 +61,7 @@ const loginUser = async (req, res) => {
             message: "User not found, please register or check your information and try again."
         });
 
-        const validPassword = await bcryptjs.compare(password, user.password);
+        const validPassword = await bcrypt.compare(password, user.password);
         if (!validPassword) return res.status(401).json({
             message: "Invalid entry, please try again"
         });
@@ -90,8 +90,4 @@ const loginUser = async (req, res) => {
 
 
 
-<<<<<<< HEAD
 module.exports = { registerUser, loginUser };// Should include isAdmin, authorization, and authentication
-=======
-module.exports = { registerUser, loginUser };
->>>>>>> develop
