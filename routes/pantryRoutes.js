@@ -10,7 +10,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Failed to fetch pantries"})
 }})
 
-router.post("/getinvolved", async (req, res) => {
+router.post("/newPantry", async (req, res) => {
     const  { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
             console.log(pantryName, address, city, state, zipCode, hours, requirements, contact);
 
