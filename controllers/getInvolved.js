@@ -1,14 +1,22 @@
 const nodemailer = require("nodemailer");
-const ContactForm = require("../models/ContactForm");
+const GetInvolved = require("../models/GetInvolved");
 
-const contactFormEmail = async (req, res) => {
+const getInvolvedEmail = async (req, res) => {
     try {
-        const { name, email, message } = req.body;
+        const { name, phoneNumber, email, message, typeOfInquiry } = req.body;
 
-        const newMessage = new ContactForm({ 
+        if (!name || !email || !message || !typeOfInquiry) {
+            return res.status(400).json({
+                message: "All required fields must be completed: Name, Email, Reason, and Message."
+            })
+        }
+
+        const newMessage = new GetInvolved({ 
             name, 
+            phoneNumber,
             email, 
-            message 
+            message,
+            typeOfInquiry 
         });
         
         await newMessage.save();
@@ -34,7 +42,9 @@ const contactFormEmail = async (req, res) => {
             subject: "New Contact Form Message",
             text: ` 
             Name: ${name}
+            Phone Number: ${phoneNumber}
             Email: ${email}
+            Type of Inquiry: ${typeOfInquiry}
             Message: ${message}
             `
             // ^^ renders as a plain text body, "Just the facts, ma'am, just the facts..."
@@ -58,4 +68,4 @@ const contactFormEmail = async (req, res) => {
 
 
 
-module.exports = { contactFormEmail };
+module.exports = { getInvolvedEmail };

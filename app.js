@@ -11,7 +11,7 @@ const host = "127.0.0.1";
 const authRoutes = require("./routes/authRoutes");
 const pantryRoutes = require('./routes/pantryRoutes');
 const userRoutes = require('./routes/userRoutes');
-const contactRoutes = require("./routes/contactRoutes");
+const getInvolvedRoutes = require("./routes/getInvolvedRoutes");
 
 // testing the routes
 app.get("/", (req, res) => {
@@ -26,7 +26,7 @@ app.use(express.json());
 app.use("/api/auth", authRoutes); 
 app.use("/api/pantries", pantryRoutes);
 app.use("/api/user", userRoutes);
-app.use("/api/contact", contactRoutes);
+app.use("/api/getInvolved", getInvolvedRoutes);
 
 
 app.listen(PORT, host, () => {
