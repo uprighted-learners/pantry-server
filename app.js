@@ -10,7 +10,7 @@ const host = "127.0.0.1";
 
 const authRoutes = require("./routes/authRoutes");
 const pantryRoutes = require('./routes/pantryRoutes');
-const userRoutes = requier('./routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 // testing the routes
 app.get("/", (req, res) => {
