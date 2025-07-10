@@ -3,16 +3,16 @@ const GetInvolved = require("../models/GetInvolved");
 
 const getInvolvedEmail = async (req, res) => {
     try {
-        const { name, phoneNumber, email, message, typeOfInquiry } = req.body;
+        const { fullName, phoneNumber, email, message, typeOfInquiry } = req.body;
 
-        if (!name || !email || !message || !typeOfInquiry) {
+        if (!fullName || !email || !message || !typeOfInquiry) {
             return res.status(400).json({
                 message: "All required fields must be completed: Name, Email, Reason, and Message."
             })
         }
 
         const newMessage = new GetInvolved({ 
-            name, 
+            fullName, 
             phoneNumber,
             email, 
             message,
@@ -37,11 +37,11 @@ const getInvolvedEmail = async (req, res) => {
         });
 
         const mailOptions = {
-            from: `"${name}" <${email}>`, // the person filling out the form
+            from: `"${fullName}" <${email}>`, // the person filling out the form
             to: testAccount.user, // our email, in this case ethereal
             subject: "New Contact Form Message",
             text: ` 
-            Name: ${name}
+            Name: ${fullName}
             Phone Number: ${phoneNumber}
             Email: ${email}
             Type of Inquiry: ${typeOfInquiry}
