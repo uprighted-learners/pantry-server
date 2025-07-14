@@ -3,6 +3,7 @@ const GetInvolved = require("../models/GetInvolved");
 
 const getInvolvedEmail = async (req, res) => {
     try {
+        console.log("incoming request body:", req.body);
         const { fullName, phoneNumber, email, message, typeOfInquiry } = req.body;
 
         if (!fullName || !email || !message || !typeOfInquiry) {
