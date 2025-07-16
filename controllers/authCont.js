@@ -47,7 +47,8 @@ const registerUser = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.status(500).json({
-            message: "Something went wrong on our end. Please try again later."
+            message: "Something went wrong on our end. Please try again later.",
+            error: err
         });
     }
 };
@@ -83,7 +84,7 @@ const loginUser = async (req, res) => {
     } catch(err) {
         console.log(err);
         res.status(500).json({
-            message: `${err}`
+            message: "Server error", error: err
         });
     }
 };
