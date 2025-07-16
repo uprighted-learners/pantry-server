@@ -19,8 +19,8 @@ exports.createPantry = async (req, res) => {
         // Missy added missing information that was needed to match the Pantry model
         const { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
         const existing = await Pantry.findOne({ pantryName });
-
         
+
         if (existing) {
             return res.status(409).json({ message: "Pantry already exists"});
         }
