@@ -1,5 +1,5 @@
 const Pantry = require("../models/Pantry")
-const SALT = Number(process.env.SALT);
+// const SALT = Number(process.env.SALT); -salt not needed here (Missy)
 
 exports.getPantries = async (req, res) => {
     try {
@@ -13,10 +13,19 @@ exports.getPantries = async (req, res) => {
     }
 };
 
-exports.CreatePantry = async (req, res) => {
+exports.createPantry = async (req, res) => {
     try {
-        const { pantryName, zipCode } = req.body;
+
+        // Missy added missing information that was needed to match the Pantry model
+        const { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
         const existing = await Pantry.findOne({ pantryName });
+
+        // Missy added basic validation for required fields
+        if (!pantryName || !address || !city || !state || !zipCode || !hours || !requirements || !contact) {
+            return res.status(400).json({
+                message: "All fields are required for pantry submissions"
+            });
+        }
 
         if (existing) {
             return res.status(409).json({ message: "Pantry already exists"});

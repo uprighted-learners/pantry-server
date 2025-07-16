@@ -1,35 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const Pantry = require("../models/Pantry.js");
+const { getPantries, createPantry } = require("../controllers/pantryCont");
+// Missy added import auth
+const { authenticate, isAdmin } = require("../middleware/authMdw");
 
-router.get("/", async (req, res) => {
-   try {
-    const pantries = await Pantry.find();
-    res.json(pantries);
-} catch (err) {
-    res.status(500).json({ error: "Failed to fetch pantries"})
-}})
 
-router.post("/newPantry", async (req, res) => {
-    const  { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
-            console.log(pantryName, address, city, state, zipCode, hours, requirements, contact);
 
-            try {
-            const foundPantry = await Pantry.findOne({ pantryName });
+router.get("/", getPantries)
 
-            if (foundPantry) {
-                return res.status(409).json ({
-                    message: "Pantry already exists"
-                });
-            } 
-
-                const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, requirements, contact });
-                await newPantry.save();
-
-                res.status(201).json({ message: "Pantry added successfully", pantry: newPantry });
-                } catch (err) {
-                    res.status(500).json({ message: err.message });
-                }
-                });
+// Missy added auth 
+router.post("/newPantry", authenticate, isAdmin, createPantry);
 
 module.exports = router

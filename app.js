@@ -12,6 +12,7 @@ const authRoutes = require("./routes/authRoutes");
 const pantryRoutes = require('./routes/pantryRoutes');
 const userRoutes = require('./routes/userRoutes');
 const getInvolvedRoutes = require("./routes/getInvolvedRoutes");
+const dashboardRoutes = require("./routes/dashboardRoutes");
 
 // testing the routes
 app.get("/", (req, res) => {
@@ -27,6 +28,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/pantries", pantryRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/getInvolved", getInvolvedRoutes);
+app.use("/api/dashboard", dashboardRoutes);
 
 
 app.listen(PORT, host, () => {

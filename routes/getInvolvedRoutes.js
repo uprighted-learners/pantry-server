@@ -1,6 +1,6 @@
 const router = require("express").Router();
-const { getInvolvedEmail } = require("../controllers/getInvolved");
+const { getInvolvedSubmission } = require("../controllers/getInvolvedCont");
 
-router.post("/", getInvolvedEmail);
+router.post("/", getInvolvedSubmission);
 
 module.exports = router;

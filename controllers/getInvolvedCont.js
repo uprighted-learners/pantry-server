@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const GetInvolved = require("../models/GetInvolved");
 
-const getInvolvedEmail = async (req, res) => {
+const getInvolvedSubmission = async (req, res) => {
     try {
         console.log("incoming request body:", req.body);
         const { fullName, phoneNumber, email, message, typeOfInquiry } = req.body;
@@ -62,11 +62,11 @@ const getInvolvedEmail = async (req, res) => {
     } catch (err) {
         console.log("Contact form error:", err);
         res.status(500).json({ 
-            message: "Failed to send email"
+            message: "Failed to send email", error: err
         });
     }
 };
 
 
 
-module.exports = { getInvolvedEmail };
+module.exports = { getInvolvedSubmission };

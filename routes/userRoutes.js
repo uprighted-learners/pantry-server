@@ -1,18 +1,20 @@
 const express = require('express');
 const router = express.Router();
 const { deleteUser, updateUser } = require('../controllers/userCont');
+// Missy added auth 
+const { authenticate, isAdmin } = require("../middleware/authMdw");
 
 console.log("Testing Server")
 
 
 //delete
-
-router.delete('/:id', deleteUser);
+// Missy added auth
+router.delete('/:id', authenticate, isAdmin, deleteUser);
 
 
 // update 
-
-router.put('/:id', updateUser);
+// Missy added auth
+router.put('/:id', authenticate, isAdmin, updateUser);
 
 
 
