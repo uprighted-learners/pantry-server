@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { getInvolvedSubmission } = require("../controllers/getInvolved");
+const { getInvolvedSubmission } = require("../controllers/getInvolvedCont");
 
 router.post("/", getInvolvedSubmission);
 

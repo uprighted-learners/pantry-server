@@ -91,4 +91,4 @@ const loginUser = async (req, res) => {
 
 
 
-module.exports = { registerUser, loginUser };// Should include isAdmin, authorization, and authentication
+module.exports = { registerUser, loginUser };

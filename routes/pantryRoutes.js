@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const { getPantries, createPantry } = require("../controllers/pantryCont.js");
+const { getPantries, createPantry } = require("../controllers/pantryCont");
 // Missy added import auth
 const { authenticate, isAdmin } = require("../middleware/authMdw");
+
+
 
 router.get("/", getPantries)
 
