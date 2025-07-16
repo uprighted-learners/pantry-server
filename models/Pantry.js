@@ -1,14 +1,46 @@
 const mongoose = require('mongoose');
 
+// Missy made schema keys/value pairs required
 const pantrySchema = new mongoose.Schema({
-        pantryName: { type: String, required: true },
-     address: String,
-     city: String,
-     state: String,
-        zipCode: { type: String, required: true },
-     hours: String,
-     requirements: [String],
-     contact: String
+   pantryName: { 
+      type: String, 
+      required: true 
+   },
+
+   address: {
+      type: String,
+      required: true
+   },
+
+   city: {
+      type: String,
+      required: true
+   },
+
+   state: {
+      type: String,
+      required: true
+   },
+
+   zipCode: { 
+      type: String, 
+      required: true 
+   },
+
+   hours: {
+      type: String,
+      required: true
+   },
+
+   requirements: {
+      type: [String],
+      required: true
+   },
+
+   contact: {
+      type: String,
+      required: true
+   }
 });
 
 const Pantry = mongoose.model('Pantry', pantrySchema)
