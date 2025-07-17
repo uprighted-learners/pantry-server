@@ -8,7 +8,8 @@ const getInvolvedSchema = new mongoose.Schema({
 
     phoneNumber: {
         type: String, 
-        required: false
+        required: false,
+        match: [/^\d{10}$/, "Phone number must be 10 digits with no spaces or symbols"]
     },
 
     email: {
