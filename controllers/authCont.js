@@ -68,7 +68,7 @@ const loginUser = async (req, res) => {
         });
 
         const token = generateToken(user);
-        console.log(token);
+        console.log("Loggedin:", user?.isAdmin, token);
 
         res.status(200).json({
             message: "Login Successful",
