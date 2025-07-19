@@ -35,7 +35,7 @@ const adminDashboardData = async (req, res) => {
             message: "Admin dashboard data fetched successfully",
             totalUsers: allUsers.length,
             allUsers: allUsers,
-            totalEmails: allGetInvolvedSubmissions.length,
+            totalSubmissions: allGetInvolvedSubmissions.length,
             allSubmissions: allGetInvolvedSubmissions,
             totalPantries: allPantries.length,
             allPantries: allPantries

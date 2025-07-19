@@ -26,7 +26,7 @@ app.use(express.json());
 // There was a ton of confusion around the difference between server and client/html endpoints in my last project, so I looked it up. I couldn't find it using strategic key words, so I asked ChatGPT, but wanted to be sure so I finally just added the exact code -app.use("/api/auth", authRoutes); vs. app.use("/", authRoutes);- to the search engine and that worked. I read this article -https://dev.to/aritik/setting-up-auth-routes-with-express-57oi- This allows for the server/client separation. (Nick asked why, and this is why)
 app.use("/api/auth", authRoutes); 
 app.use("/api/pantries", pantryRoutes);
-app.use("/api/user", userRoutes);
+app.use("/api/users", userRoutes);
 app.use("/api/getInvolved", getInvolvedRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
