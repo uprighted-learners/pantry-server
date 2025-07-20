@@ -17,11 +17,11 @@ exports.createPantry = async (req, res) => {
     try {
 
         // Missy added missing information that was needed to match the Pantry model
-        const { pantryName, address, city, state, zipCode, hours, requirements, contact } = req.body;
+        const { pantryName, address, city, state, zipCode, hours, requirements, contact, lat, lng } = req.body;
         const existing = await Pantry.findOne({ pantryName });
 
         // Missy added basic validation for required fields
-        if (!pantryName || !address || !city || !state || !zipCode || !hours || !requirements || !contact) {
+        if (!pantryName || !address || !city || !state || !zipCode || !hours || !requirements || !contact || !lat || !lng) {
             return res.status(400).json({
                 message: "All fields are required for pantry submissions"
             });
@@ -31,7 +31,7 @@ exports.createPantry = async (req, res) => {
             return res.status(409).json({ message: "Pantry already exists"});
         }
 
-        const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, requirements, contact });
+        const newPantry = new Pantry({ pantryName, address, city, state, zipCode, hours, requirements, contact, lat, lng });
         await newPantry.save();
 
         res.status(201).json({
