@@ -1,12 +1,15 @@
 const express = require('express');
 const router = express.Router();
-const { deleteUser, updateUser } = require('../controllers/userCont');
+const { deleteUser, updateUser, getAllUsers, getUserById } = require('../controllers/userCont');
 // Missy added auth 
 const { authenticate, isAdmin } = require("../middleware/authMdw");
 
 console.log("Testing Server")
 
 
+
+router.get('/', authenticate, isAdmin, getAllUsers);
+router.get('/:id', authenticate, isAdmin, getUserById)
 //delete
 // Missy added auth
 router.delete('/:id', authenticate, isAdmin, deleteUser);
