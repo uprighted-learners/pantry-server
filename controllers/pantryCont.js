@@ -33,6 +33,12 @@ exports.getPantries = async (req, res) => {
         if (filters.contact) {
             query.contact = { $regex: filters.contact, $options: 'i' };
         }
+        if (filters.lat) {
+            query.lat = { $regex: filters.lat, $options: 'i' };
+        }
+        if (filters.long) {
+            query.long = { $regex: filters.long, $options: 'i' };
+        }
 
         const total = await Pantry.countDocuments(query);
 
@@ -128,6 +134,7 @@ exports.createPantry = async (req, res) => {
             message: "Pantry created successfully",
             data: createdPantry
         });
+
     } catch (err) {
         console.error("Error creating pantry:", err);
         res.status(500).json({
@@ -157,6 +164,7 @@ exports.updatePantry = async (req, res) => {
             message: "Pantry updated successfully",
             data: obj 
         });
+
     } catch (err) {
         console.error("Error updating pantry:", err);
         res.status(500).json({
@@ -180,6 +188,7 @@ exports.deletePantry = async (req, res) => {
             message: "Pantry deleted successfully",
             data: { id: deletedPantry._id.toString() }
         });
+
     } catch (err) {
         console.error("Error deleting pantry:", err);
         res.status(500).json({

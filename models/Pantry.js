@@ -42,12 +42,12 @@ const pantrySchema = new mongoose.Schema({
       required: true
    },
 
-      lat: {
+   lat: {
       type: Number,
       required: true
    },
 
-      long: {
+   long: {
       type: Number,
       required: true
    }
