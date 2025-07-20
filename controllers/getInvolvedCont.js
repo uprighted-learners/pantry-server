@@ -67,6 +67,87 @@ const getInvolvedSubmission = async (req, res) => {
     }
 };
 
+const getInvolvedList = async (req, res) => {
+    try {
+        const { _sort, _order, _start, _end, ...filters } = req.query;
+
+        let query = {};
+        //!rewrite these with regex
+        if (filters.fullName) { query.fullName = filters.fullName; }
+        if (filters.phoneNumber) { query.phoneNumber = filters.phoneNumber; }
+        if (filters.email) { query.email = filters.email; }
+        if (filters.message) { query.message = filters.message; }
+        if (filters.typeOfInquiry) { query.typeOfInquiry = filters.typeOfInquiry; }
+        if (filters.date) { query.date = filters.date; }
+
+        const total = await GetInvolved.countDocuments(query);
+
+        let sortOptions = {};
+
+        if (_sort) {
+            sortOptions[_sort] = (_order === "DESC" ? -1 : 1);
+        } else {
+            sortOptions.createdAt = -1;
+        }
+
+        const start = parseInt(_start) || 0;
+        const limit = (parseInt(_end) - start) || 25
+
+        const records = await GetInvolved.find(query)
+            .sort(sortOptions)
+            .skip(start)
+            .limit(limit);
+
+        const formattedRecords = records.map(record => {
+            const obj = record.toObject();
+            obj.id = obj._id.toString();
+            delete obj._id;
+            return obj;
+        });
+
+        const end = start + formattedRecords.length -1; // or start + limit -1 (if always returning limit)
+
+        res.setHeader("Content-Range", `getInvolved ${start}-${end}/${total}`);
+        res.set("Access-Control-Expose-Headers", "Content-Range"); 
+
+        res.status(200).json(formattedRecords);
+
+    } catch (err) {
+        console.error("Error fetching getInvolved list:", err);
+        res.status(500).json({
+            message: "Failed to fetch getInvolved list",
+            error: err.message
+        });
+    }
+};
+
+const getInvolvedOne = async (req, res) => {
+    try {
+        const { id } = req.params; 
+
+        const record = await GetInvolved.findById(id);
+
+        if (!record) {
+            return res.status(404).json({ message: "Record not found" });
+        }
+
+        const obj = record.toObject();
+        obj.id = obj._id.toString();
+        delete obj._id;
+
+        res.status(200).json(obj);
+
+    } catch (err) {
+        console.error("Error fetching single getInvolved record:", err);
+        res.status(500).json({
+            message: "Failed to fetch single getInvolved record",
+            error: err.message
+        });
+    }
+};
 
 
-module.exports = { getInvolvedSubmission };
+
+
+
+module.exports = { getInvolvedSubmission, getInvolvedList, getInvolvedOne };
