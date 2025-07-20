@@ -40,6 +40,16 @@ const pantrySchema = new mongoose.Schema({
    contact: {
       type: String,
       required: true
+   },
+
+      lat: {
+      type: Number,
+      required: true
+   },
+
+      long: {
+      type: Number,
+      required: true
    }
 });
 
