@@ -60,8 +60,9 @@ exports.getPantries = async (req, res) => {
 
         const formattedPantries = pantries.map(pantry => {
             const obj = pantry.toObject(); 
-            //obj.id = obj._id.toString(); 
-            //delete obj._id; 
+            obj.id = obj._id.toString(); 
+            obj._id = obj._id.toString();
+            // delete obj._id; 
             return obj;
         });
 
