@@ -36,8 +36,8 @@ exports.getPantries = async (req, res) => {
         if (filters.lat) {
             query.lat = { $regex: filters.lat, $options: 'i' };
         }
-        if (filters.long) {
-            query.long = { $regex: filters.long, $options: 'i' };
+        if (filters.lng) {
+            query.lng = { $regex: filters.lng, $options: 'i' };
         }
 
         const total = await Pantry.countDocuments(query);
@@ -60,13 +60,14 @@ exports.getPantries = async (req, res) => {
 
         const formattedPantries = pantries.map(pantry => {
             const obj = pantry.toObject(); 
-            obj.id = obj._id.toString(); 
-            delete obj._id; 
+            //obj.id = obj._id.toString(); 
+            //delete obj._id; 
             return obj;
         });
 
         const end = start + formattedPantries.length - 1;
         res.setHeader('Content-Range', `pantries ${start}-${end}/${total}`);
+        res.set("Access-Control-Expose-Headers", "Content-Range"); 
         res.status(200).json(formattedPantries);
         
     } catch (err) {

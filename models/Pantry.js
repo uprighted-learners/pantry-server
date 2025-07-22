@@ -47,7 +47,7 @@ const pantrySchema = new mongoose.Schema({
       required: true
    },
 
-   long: {
+   lng: {
       type: Number,
       required: true
    }
