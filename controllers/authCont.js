@@ -39,6 +39,7 @@ const registerUser = async (req, res) => {
                 _id: newUser._id,
                 fullName: newUser.fullName,
                 email: newUser.email,
+                zipCode: newUser.zipCode,
                 isAdmin: newUser.isAdmin
             },
             token
@@ -76,6 +77,7 @@ const loginUser = async (req, res) => {
                 _id: user._id,
                 fullName: user.fullName,
                 email: user.email,
+                zipCode: user.zipCode,
                 isAdmin: user.isAdmin
             },
             token
