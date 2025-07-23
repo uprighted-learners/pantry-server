@@ -34,7 +34,7 @@ const getInvolvedSubmission = async (req, res) => {
             auth: { // login info
                 user: testAccount.user, // temporary creds created by createTestAccount fx
                 pass: testAccount.pass // only avail while running server
-            }
+            },
         });
 
         const mailOptions = {
@@ -72,13 +72,37 @@ const getInvolvedList = async (req, res) => {
         const { _sort, _order, _start, _end, ...filters } = req.query;
 
         let query = {};
-        //!rewrite these with regex
-        if (filters.fullName) { query.fullName = filters.fullName; }
-        if (filters.phoneNumber) { query.phoneNumber = filters.phoneNumber; }
-        if (filters.email) { query.email = filters.email; }
-        if (filters.message) { query.message = filters.message; }
-        if (filters.typeOfInquiry) { query.typeOfInquiry = filters.typeOfInquiry; }
-        if (filters.date) { query.date = filters.date; }
+        
+        if (filters.fullName) { 
+            query.fullName = { $regex: filters.fullName, $options: 'i' }; 
+        }
+        if (filters.phoneNumber) { 
+            query.phoneNumber = { $regex: filters.phoneNumber, $options: 'i' }; 
+        }
+        if (filters.email) { 
+            query.email = { $regex: filters.email, $options: 'i' }; 
+        }
+        if (filters.message) { 
+            query.message = { $regex: filters.message, $options: 'i' }; 
+        }
+        if (filters.typeOfInquiry) { 
+            query.typeOfInquiry = { $regex: filters.typeOfInquiry, $options: 'i' }; 
+        }
+        if (filters.date) { 
+            query.date = filters.date; // matches to an exact string not a range
+        }
+
+        if (filters.q) {
+            const searchTerm = { $regex: filters.q, $options: 'i' };
+            query.$or = [
+                { fullName: searchTerm },
+                { email: searchTerm },
+                { phoneNumber: searchTerm },
+                { message: searchTerm },
+                { typeOfInquiry: searchTerm },
+                { date: searchTerm }
+            ];
+        }
 
         const total = await GetInvolved.countDocuments(query);
 
@@ -91,7 +115,7 @@ const getInvolvedList = async (req, res) => {
         }
 
         const start = parseInt(_start) || 0;
-        const limit = (parseInt(_end) - start) || 25
+        const limit = (parseInt(_end) - start) || 25;
 
         const records = await GetInvolved.find(query)
             .sort(sortOptions)
@@ -145,8 +169,6 @@ const getInvolvedOne = async (req, res) => {
         });
     }
 };
-
-
 
 
 

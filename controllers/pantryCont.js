@@ -11,7 +11,6 @@ exports.getPantries = async (req, res) => {
         if (filters.pantryName) {
             query.pantryName = { $regex: filters.pantryName, $options: 'i' }; // Case-insensitive search
         }
-
         if (filters.address) {
             query.address = { $regex: filters.address, $options: 'i' };
         }
